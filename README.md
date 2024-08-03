@@ -2,7 +2,10 @@
 
 - Change capslock to ctrl
 - `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
-- `brew install git tmux warp visual-studio-code`
+  - `(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/robertparton/.zprofile
+    eval "$(/opt/homebrew/bin/brew shellenv)"`
+- `brew install gh git tmux warp visual-studio-code`
+- `gh auth login`
 - `git clone https://github.com/rjparton/rjparton_config $HOME/.rjparton_config`
 - `chsh -s /bin/zsh`
 - `ln -s "$HOME"/.rjparton_config/git/gitconfig "$HOME"/.gitconfig`
