@@ -1,7 +1,7 @@
 # config
 
 - Change capslock to ctrl
-- Install Homebrew `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+- `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
 - `brew install git tmux warp visual-studio-code`
 - `git clone https://github.com/rjparton/rjparton_config $HOME/.rjparton_config`
 - chsh -s /bin/zsh
