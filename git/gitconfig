@@ -115,3 +115,6 @@
   enabled = true
 [pull]
 	rebase = true
+[user]
+	name = Rober Parton
+	email = partonrobertjames@gmail.com
