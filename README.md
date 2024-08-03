@@ -18,6 +18,9 @@
 - `mkdir -p "$HOME"/.config/nvim && ln -s "$HOME"/.rjparton_config/vim/init.vim "$HOME"/.config/nvim/init.vim`
 
 ## VSCode
-- Install vim
-- TODO: Copy `settings.json`
+- `rm -rf "$HOME"/Library/Application\ Support/Code/User/settings.json`
+- `ln -s "$HOME"/.rjparton_config/vscode/settings.json "$HOME"/Library/Application\ Support/Code/User/settings.json`
+
+### Install Extensions
+- vim
 - 
