@@ -1,0 +1,91 @@
+{
+    "workbench.colorTheme": "Default Dark Modern",
+    "workbench.colorTheme": "One Dark Pro",
+    "vim.easymotion": true,
+    "vim.incsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.hlsearch": true,
+    "vim.insertModeKeyBindings": [
+        {
+        "before": ["j", "k"],
+        "after": ["<Esc>"]
+        }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+        "before": ["<leader>", "<space>"],
+        "commands": [":nohl"]
+        },
+    ],
+    "vim.leader": ",",
+
+    "extensions.experimental.affinity": {
+        "vscodevim.vim": 1
+    },
+    "editor.lineNumbers": "relative",
+    "yaml.schemas": {
+        "file:///Users/robertparton/.vscode/extensions/atlassian.atlascode-3.0.10/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    },
+    "rewrap.wrappingColumn": 88,
+    "editor.rulers": [88],
+    "prettier.bracketSameLine": true,
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "cSpell.language": "en-us",
+    "cSpell.userWords": [
+        "Shotstack"
+    ],
+    "screencastMode.onlyKeyboardShortcuts": true,
+    "C_Cpp.default.cppStandard": "c++17",
+    "atlascode.jira.lastCreateSiteAndProject": {
+        "siteId": "",
+        "projectKey": ""
+    },
+    "liveSassCompile.settings.formats": [
+
+        {
+            "format": "compressed",
+            "extensionName": ".min.css",
+            "savePath": "/css",
+            "savePathReplacementPairs": null
+        }
+    ],
+    "explorer.confirmDragAndDrop": false,
+    "explorer.confirmDelete": false,
+    "workbench.editor.enablePreview": true,
+    "workbench.iconTheme": "file-icons",
+    "terminal.integrated.enableMultiLinePasteWarning": false,
+    "sshfs.configs": [
+        {
+            "name": "cse",
+            "host": "login.cse.unsw.edu.au",
+            "username": "z5330528",
+            "password": "Unsw808!!!",
+            "root": "~"
+        },
+        {
+            "name": "vxdb2",
+            "host": "d2.cse.unsw.edu.au",
+            "root": "~",
+            "username": "z5330528",
+            "password": "Unsw808!!!"
+        }
+    ],
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "terminal.integrated.fontFamily": "MesloLGS NF",
+    "editor.cursorBlinking": "smooth",
+
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": false,
+    },
+    "black-formatter.args": [
+        "--line-length=88",
+        "--preview"
+    ],
+}
