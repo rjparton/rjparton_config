@@ -1,11 +1,12 @@
 # config
 
-## MacOX Setup
+## MacOS Setup
 - Change capslock to ctrl
 - Keyboard > Key repeat rate > Fastest
 - Keyboard > Delay until repeat > Shortest
 - Enable key repeats `defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false`
 
+# Code Setup
 - `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
   - `(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/robertparton/.zprofile
     eval "$(/opt/homebrew/bin/brew shellenv)"`
