@@ -22,6 +22,9 @@
   # Branch
   b = branch -v                     # Branch (verbose)
 
+  # Add
+  a = add -A
+
   # Commit
   c = commit -m                     # Commit with message
   ca = commit -am                   # Commit all with message
