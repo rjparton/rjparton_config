@@ -57,7 +57,7 @@
     "explorer.confirmDragAndDrop": false,
     "explorer.confirmDelete": false,
     "workbench.editor.enablePreview": true,
-    "workbench.iconTheme": "file-icons",
+    "workbench.iconTheme": "material-icon-theme",
     "terminal.integrated.enableMultiLinePasteWarning": false,
     "sshfs.configs": [
         {
