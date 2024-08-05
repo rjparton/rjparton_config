@@ -15,7 +15,7 @@
 - `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
   - `(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/robertparton/.zprofile
     eval "$(/opt/homebrew/bin/brew shellenv)"`
-- `brew install gh git tmux warp visual-studio-code`
+- `brew install gh git tmux warp visual-studio-code pip node yarn`
 - `gh auth login`
 - `git clone https://github.com/rjparton/rjparton_config $HOME/.rjparton_config`
 - `chsh -s /bin/zsh`
