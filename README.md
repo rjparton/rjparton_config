@@ -32,4 +32,10 @@
 
 ### Install Extensions
 - vim
-- 
+- rewrap
+- prettier
+- black
+- autopep8
+- emmet jss
+- eslint
+- c/c++

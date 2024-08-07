@@ -23,9 +23,6 @@
         "vscodevim.vim": 1
     },
     "editor.lineNumbers": "relative",
-    "yaml.schemas": {
-        "file:///Users/robertparton/.vscode/extensions/atlassian.atlascode-3.0.10/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
-    },
     "rewrap.wrappingColumn": 88,
     "editor.rulers": [88],
     "prettier.bracketSameLine": true,
@@ -36,9 +33,6 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "cSpell.language": "en-us",
-    "cSpell.userWords": [
-        "Shotstack"
-    ],
     "screencastMode.onlyKeyboardShortcuts": true,
     "C_Cpp.default.cppStandard": "c++17",
     "atlascode.jira.lastCreateSiteAndProject": {
@@ -87,4 +81,5 @@
         "--line-length=88",
         "--preview"
     ],
+    "editor.minimap.enabled": false,
 }
