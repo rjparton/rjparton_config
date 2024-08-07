@@ -70,7 +70,6 @@
         }
     ],
     "javascript.updateImportsOnFileMove.enabled": "always",
-    "terminal.integrated.fontFamily": "MesloLGS NF",
     "editor.cursorBlinking": "smooth",
 
     "[python]": {
