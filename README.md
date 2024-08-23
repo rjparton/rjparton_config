@@ -29,6 +29,7 @@
 ## VSCode
 - `rm -rf "$HOME"/Library/Application\ Support/Code/User/settings.json`
 - `ln -s "$HOME"/.rjparton_config/vscode/settings.json "$HOME"/Library/Application\ Support/Code/User/settings.json`
+- Theme: Tokyo Night
 
 ### Install Extensions
 - vim
@@ -39,3 +40,7 @@
 - emmet jss
 - eslint
 - c/c++
+- gitlens
+- material icon theme
+- tokyo night
+- python
