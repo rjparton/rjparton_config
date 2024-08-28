@@ -25,6 +25,11 @@
 - `ln -s "$HOME"/.rjparton_config/vim/vimrc "$HOME"/.vimrc`
 - `ln -s "$HOME"/.rjparton_config/vim "$HOME"/.vim`
 - `mkdir -p "$HOME"/.config/nvim && ln -s "$HOME"/.rjparton_config/vim/init.vim "$HOME"/.config/nvim/init.vim`
+- Pure prompt install: `git clone https://github.com/sindresorhus/pure.git "$HOME/.rjparton_config/zsh/pure"`
+
+# Tmux
+- Install TPM: `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
+
 
 ## VSCode
 - `rm -rf "$HOME"/Library/Application\ Support/Code/User/settings.json`
