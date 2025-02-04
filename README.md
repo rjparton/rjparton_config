@@ -29,6 +29,7 @@
 
 # Tmux
 - Install TPM: `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
+- Install the plugins within tmux session `C-a I`
 
 
 ## VSCode
