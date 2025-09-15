@@ -22,7 +22,7 @@
     "extensions.experimental.affinity": {
         "vscodevim.vim": 1
     },
-    "editor.lineNumbers": "on",
+    "editor.lineNumbers": "relative",
     "rewrap.wrappingColumn": 88,
     "editor.rulers": [88],
     "prettier.bracketSameLine": true,
@@ -86,6 +86,7 @@
         "editorLineNumber.foreground": "#5e89af",
         "editorLineNumber.activeForeground": "#FFA500",
     },
-    "gitlens.hovers.enabled": false
+    "gitlens.hovers.enabled": false,
+    "github.copilot.nextEditSuggestions.enabled": true
 
 }
