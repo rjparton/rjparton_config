@@ -4,7 +4,7 @@
 - Change capslock to ctrl
 - Keyboard > Key repeat rate > Fastest
 - Keyboard > Delay until repeat > Shortest
-- Enable key repeats `defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false`
+- Enable key repeats, run in a terminal: `defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false`
 
 ## Mouse Settings
 - Thumb buttons: Desktop right/left
