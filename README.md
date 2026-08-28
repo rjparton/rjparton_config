@@ -59,6 +59,18 @@ versions at release, which strands a tool that ships several times a week, so
 `flake.nix` overlays **opencode alone** from `nixpkgs-unstable`. Nothing else
 comes from unstable.
 
+Rust has the same problem for the same reason: stable nixpkgs pins `rustc`
+1.95.0, three releases behind upstream. The `rust-overlay` input supplies the
+current stable toolchain instead, still pinned by `flake.lock`. Update it with
+`nix flake update rust-overlay && ./rebuild.sh`.
+
+`home.nix` declares the ambient toolchain only. A project needing a specific
+version ships its own `flake.nix` with a `devShell`, which keeps the pin
+reproducible in CI as well; `rust-toolchain.toml` on its own does nothing here,
+because no `rustup` shim intercepts `cargo`. For the same reason, prefer adding
+Rust CLI tools to `home.packages` over `cargo install`, which would write
+unmanaged binaries to `~/.cargo/bin`.
+
 ## Manual steps
 
 Nix cannot set these:

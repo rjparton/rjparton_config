@@ -11,13 +11,19 @@
     # ships several releases a week.
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
+    # Rust releases every six weeks; stable nixpkgs would freeze the compiler at
+    # whatever 26.05 shipped with. This overlay tracks upstream Rust and exposes
+    # each channel as a derivation, so the toolchain is pinned by flake.lock.
+    rust-overlay.url = "github:oxalica/rust-overlay";
+    rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
+
     home-manager.url = "github:nix-community/home-manager/release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
   };
 
-  outputs = inputs@{ self, nix-darwin, nix-homebrew, home-manager, nixpkgs, nixpkgs-unstable }:
+  outputs = inputs@{ self, nix-darwin, nix-homebrew, home-manager, nixpkgs, nixpkgs-unstable, rust-overlay }:
     let
       # The one username line to change if this isn't your machine.
       # bootstrap.sh offers to rewrite this for you if your macOS username differs.
@@ -33,6 +39,7 @@
               (final: prev: {
                 opencode = nixpkgs-unstable.legacyPackages.${prev.stdenv.hostPlatform.system}.opencode;
               })
+              rust-overlay.overlays.default
             ];
           }
           nix-homebrew.darwinModules.nix-homebrew

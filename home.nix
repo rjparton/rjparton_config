@@ -20,6 +20,15 @@ in
     lazygit
     neovim
     opencode  # overlaid from nixpkgs-unstable in flake.nix
+
+    # The ambient Rust toolchain: rustc, cargo, clippy, rustfmt and the stdlib.
+    # rust-src and rust-analyzer are what the nvim LSP config wants. Projects
+    # needing a different version pin it in their own flake devShell rather
+    # than switching this one.
+    (rust-bin.stable.latest.default.override {
+      extensions = [ "rust-src" "rust-analyzer" ];
+    })
+
     # the font everything renders in
     nerd-fonts.hack
   ];
