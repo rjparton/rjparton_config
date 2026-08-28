@@ -106,12 +106,43 @@ in
   home.file.".config/opencode/AGENTS.md".source =
     config.lib.file.mkOutOfStoreSymlink "${configRepo}/home/AGENTS.md";
 
+  # One skills directory, three tools reading it: ~/.claude for Claude Code,
+  # ~/.agents for Codex, ~/.config/opencode for opencode. Linked as a
+  # directory, so a new skill is a new folder here and nothing else.
+  #
+  # opencode would find these anyway by scanning the other two, but those
+  # scans sit behind OPENCODE_DISABLE_EXTERNAL_SKILLS and
+  # OPENCODE_DISABLE_CLAUDE_CODE_SKILLS. Its own path cannot be switched off,
+  # so it gets an explicit link. Seeing the same skill three times is
+  # harmless: opencode collapses them by name, and all three are this file.
+  home.file.".claude/skills".source =
+    config.lib.file.mkOutOfStoreSymlink "${configRepo}/home/skills";
+  home.file.".agents/skills".source =
+    config.lib.file.mkOutOfStoreSymlink "${configRepo}/home/skills";
+  home.file.".config/opencode/skills".source =
+    config.lib.file.mkOutOfStoreSymlink "${configRepo}/home/skills";
+
+  # Commands reach two of the three: Codex invokes skills directly with
+  # $skill-name instead, so it needs no wrapper. Both tools want the plural
+  # spelling; opencode accepts either.
+  home.file.".claude/commands".source =
+    config.lib.file.mkOutOfStoreSymlink "${configRepo}/home/commands";
+  home.file.".config/opencode/commands".source =
+    config.lib.file.mkOutOfStoreSymlink "${configRepo}/home/commands";
+
   # Linked file-by-file rather than as a directory: opencode also keeps
   # node_modules/, package.json and plugins/ in here, and those are not ours
   # to manage.
+  #
+  # Two files because opencode splits its config: opencode.jsonc holds server
+  # and runtime settings, tui.json holds everything the terminal UI owns,
+  # keybinds included.
   home.file.".config/opencode/opencode.jsonc".source =
     config.lib.file.mkOutOfStoreSymlink
       "${configRepo}/home/.config/opencode/opencode.jsonc";
+  home.file.".config/opencode/tui.json".source =
+    config.lib.file.mkOutOfStoreSymlink
+      "${configRepo}/home/.config/opencode/tui.json";
 
   # ~/.claude/settings.json is deliberately absent. Claude Code rewrites that
   # file itself, so a symlink here gets replaced with a real file and the

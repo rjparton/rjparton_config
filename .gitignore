@@ -10,6 +10,13 @@ home/.config/herdr/release-notes.json
 # Claude Code writes machine-local overrides here.
 .claude/settings.local.json
 
+# home/skills is symlinked into ~/.claude, ~/.agents and ~/.config/opencode,
+# so anything those tools install or stage lands in this repo. Only the skills
+# written here by hand belong in git.
+home/skills/.staging/
+home/skills/.trash/
+home/skills/synced/
+
 # macOS + nix build noise
 .DS_Store
 result

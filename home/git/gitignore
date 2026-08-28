@@ -57,3 +57,7 @@ Session.vim
 .sass-cache
 
 **/.claude/settings.local.json
+
+# Agent planning scratch. Written when a piece of work starts, deleted when it finishes, so it
+# should never be committed even if a session ends early and leaves one behind.
+plan.md

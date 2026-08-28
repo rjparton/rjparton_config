@@ -1,0 +1,20 @@
+{
+  "$schema": "https://opencode.ai/tui.json",
+
+  // wezterm translates Cmd+Left/Right into Home/End, because Cmd never reaches
+  // the terminal on macOS. opencode binds those to conversation scrolling by
+  // default, which jumps the whole view to the first or last message. Hand them
+  // to the prompt editor instead; scrolling keeps its ctrl+g variants.
+  //
+  // Buffer start/end has to move off Home/End at the same time, or two input
+  // actions compete for the same key. ctrl+home / ctrl+end collide with
+  // nothing, but note they need a keyboard that actually has those keys.
+  "keybinds": {
+    "messages_first": "ctrl+g",
+    "messages_last": "ctrl+alt+g",
+    "input_line_home": "ctrl+a,home",
+    "input_line_end": "ctrl+e,end",
+    "input_buffer_home": "ctrl+home",
+    "input_buffer_end": "ctrl+end"
+  }
+}
