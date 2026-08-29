@@ -2,8 +2,17 @@
 -- nvim-lspconfig exists to ship definitions for ~300 servers, which is a
 -- dependency for nothing when you run one.
 --
--- Servers come from home.nix, so `cmd` is a bare name and PATH resolves it to
--- the Nix store.
+-- Servers come from home.nix, so `cmd` is a bare name and PATH resolves it.
+-- rust-analyzer is the exception: PATH finds a rustup shim, which resolves a
+-- toolchain from the working directory. See the `cmd` below for why that has
+-- to be the workspace root.
+--
+-- One consequence, once the pin is honoured: a repo pinning
+-- `profile = "minimal"` has no rust-analyzer in its toolchain, so the shim
+-- fails and no server attaches, while cargo keeps working. It says
+-- `rust-analyzer is unavailable for the active toolchain` on stderr, which
+-- goes to `:LspLog` rather than a notification, so it looks like silence.
+-- Fix with `rustup component add rust-analyzer rust-src --toolchain <version>`.
 --
 -- Neovim already binds the usual actions once a server attaches, so there are
 -- no keymaps here: K hover, grn rename, gra code action, grr references,
@@ -60,7 +69,18 @@ local function cargo_workspace_root(buffer, on_dir)
 end
 
 vim.lsp.config('rust_analyzer', {
-  cmd = { 'rust-analyzer' },
+  -- Spawned at the workspace root rather than wherever nvim was started, so
+  -- the rustup shim resolves this repo's rust-toolchain.toml. A table `cmd`
+  -- would inherit nvim's cwd, and the shim would then pick the default
+  -- toolchain and export RUSTUP_TOOLCHAIN to every cargo it runs, which beats
+  -- the toolchain file. Editing a pinned repo from a nvim started elsewhere
+  -- would silently check against the wrong compiler.
+  cmd = function(dispatchers, config)
+    -- Asserted because a nil cwd is not an error to vim.lsp.rpc.start, it
+    -- silently inherits nvim's, which is the bug this exists to prevent.
+    local workspace_root = assert(config.root_dir, 'rust_analyzer: no workspace root')
+    return vim.lsp.rpc.start({ 'rust-analyzer' }, dispatchers, { cwd = workspace_root })
+  end,
   filetypes = { 'rust' },
   root_dir = cargo_workspace_root,
   settings = {

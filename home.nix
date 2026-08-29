@@ -21,13 +21,14 @@ in
     neovim
     opencode  # overlaid from nixpkgs-unstable in flake.nix
 
-    # The ambient Rust toolchain: rustc, cargo, clippy, rustfmt and the stdlib.
-    # rust-src and rust-analyzer are what the nvim LSP config wants. Projects
-    # needing a different version pin it in their own flake devShell rather
-    # than switching this one.
-    (rust-bin.stable.latest.default.override {
-      extensions = [ "rust-src" "rust-analyzer" ];
-    })
+    # Rust arrives through rustup rather than as a Nix-built toolchain, because
+    # a repo pinning rust-toolchain.toml has to be honoured, or local fmt and
+    # clippy disagree with the CI reading that same file. Only a rustup shim
+    # reads it. This package provides the rustc, cargo and rust-analyzer shims
+    # as well, so nothing needs ~/.cargo/bin on PATH. The toolchains they
+    # dispatch to live in ~/.rustup and are not reproducible from this repo,
+    # so a new machine needs the bootstrap under Manual steps in README.md.
+    rustup
 
     # the font everything renders in
     nerd-fonts.hack
