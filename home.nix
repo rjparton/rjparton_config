@@ -20,6 +20,9 @@ in
     lazygit
     neovim
     opencode  # overlaid from nixpkgs-unstable in flake.nix
+    awscli2
+    docker-client
+    kubectl
 
     # Rust arrives through rustup rather than as a Nix-built toolchain, because
     # a repo pinning rust-toolchain.toml has to be honoured, or local fmt and
@@ -40,6 +43,20 @@ in
     enable = true;
     autosuggestion.enable = true;      # ghost text from history
     syntaxHighlighting.enable = true;  # commands turn green when valid
+    envExtra = ''
+      # MDM login exports USER as the email alias; nix-darwin builds PATH and
+      # NIX_PROFILES from it, losing the per-user profile. Correct it and
+      # re-run the system environment setup.
+      if [[ "$USER" != "$(id -un)" ]]; then
+        export USER="$(id -un)"
+        unset __ETC_ZSHENV_SOURCED __NIX_DARWIN_SET_ENVIRONMENT_DONE
+        source /etc/zshenv
+        # set-environment re-exported its own defaults (e.g. EDITOR=nano);
+        # re-apply home-manager session variables on top.
+        unset __HM_SESS_VARS_SOURCED
+        source /etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh
+      fi
+    '';
     initContent = ''
       bindkey '^f' autosuggest-accept
       # zsh binds neither Home nor End by default, and terminals disagree on

@@ -30,5 +30,19 @@
       "*": "allow",
       "~/brain/personal/**": "deny"
     }
+  },
+
+  "agent": {
+    "build": {
+      "permission": {
+        "bash": {
+          "aws sts get-caller-identity *": "allow",
+          "aws eks list-clusters *": "allow",
+          "aws eks describe-cluster *": "allow",
+          "aws eks update-kubeconfig *": "allow",
+          "aws eks get-token *": "allow"
+        }
+      }
+    }
   }
 }
