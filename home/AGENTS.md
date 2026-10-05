@@ -16,6 +16,15 @@
   large swarm of subagents, always explain the tradeoffs and ask the user for explicit approval.
   Spawning 1-3 subagents to review completed work is expected and does not need approval.
 
+## Explaining technical systems
+
+- Answer the exact question first. Do not add background, adjacent concepts, caveats, or summaries unless the answer requires them.
+- Prefer a direct answer, one small example, and the relevant code reference. Stop there.
+- Expect several narrow follow-up questions during exploration. Do not turn each answer into a complete end-to-end explanation.
+- Keep exploration in chat. Do not create or update a study note unless I explicitly ask for a write-up.
+- When I ask for a write-up, synthesize the settled conclusions into one concise note. Exclude abandoned explanations and conversational repetition.
+- Clearly distinguish implemented behavior, intended design, and your recommendation.
+
 ## My dev setup
 
 - My machine is declarative: Determinate Nix, nix-darwin and home-manager, all configured in

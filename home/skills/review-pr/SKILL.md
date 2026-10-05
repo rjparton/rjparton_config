@@ -361,12 +361,34 @@ The explanation is for the user. The draft comment is for the author. Keep them 
 - 1 to 3 sentences. No greeting, no praise, no preamble.
 - Plain dash, never an em dash.
 - No "Great work", "Nice catch", "Just a thought", "It might be worth considering".
-- Confirmed bugs assert. Suspected bugs ask a direct question.
-- Design findings propose and ask, and name what the alternative removes.
+- For a confirmed bug, write the concrete observation first. Do not weaken confirmed behavior into
+  a vague possibility.
+- Then leave the conclusion open when the author can have context the reviewer lacks. Prefer `What do
+  you think?`, `Can you look into this?`, or `Can you have a think about this?` over prescribing a
+  specific implementation.
+- For design, clarity, and suspected-bug comments, use the collaborative cadence Robert and Jason
+  use where natural: `So I was thinking ...`, `Have you thought about ...`, `This is interesting
+  ...`, or `I'm thinking ...`. The same sentence must name the concrete cost, uncertainty, or wrong
+  belief. Do not put a stock opener on every comment, and do not use `This is interesting` as empty
+  praise.
+- Confirmed bugs state what happens, then ask about the desired resolution. Suspected bugs ask a
+  direct question about the missing invariant or execution path.
+- Design findings state the concrete cost, propose a direction without dictating it, and ask what the
+  author thinks.
 - Naming findings are one sentence and offer the replacement name outright.
 - Function size findings are one sentence naming the seams and the single gain.
 - Suggest the fix only when it is short enough to state in a clause.
-- Direct and unhedged. Do not apologise for the review.
+- Do not hide the finding behind politeness. Collaborative and open-ended does not mean vague.
+- Do not apologise for the review.
+
+Prefer:
+
+> We still commit the source offset after this write fails, which means the records won't get
+> replayed. Can you have a think about how we want to handle the failure?
+
+Not:
+
+> This is wrong. Change `run` to return a `Result` and abort the process here.
 
 ## 14. Finding nothing is a valid result
 
