@@ -12,6 +12,17 @@
     }
   },
 
+  "mcp": {
+    "slack": {
+      "type": "remote",
+      "url": "https://litellm.whatnot-hq.com/mcp/slack",
+      "oauth": false,
+      "headers": {
+        "x-litellm-api-key": "Bearer {file:~/.local/share/opencode/litellm-api-key}"
+      }
+    }
+  },
+
   // Rules are evaluated in order and the LAST match wins, so broad rules go
   // first and narrow rules last.
   //

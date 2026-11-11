@@ -2,19 +2,29 @@
 
 ## Working with me
 
-- Do not jump straight into implementation. Before writing or modifying code, work the request up
-  into an exhaustive plan and confirm it with me. Skip the plan only when the change is a few lines
-  and cannot affect behaviour; just make it. Reading code, searching, and investigating are always
-  fine without asking first; changing things is not. If a request is ambiguous, ask rather than
-  guessing and building the wrong thing.
+- Before changing code, propose a short plan proportional to the change and confirm it with me.
+  Skip the plan for changes of a few lines that cannot affect behaviour.
+  Reading, searching, and investigating need no approval. Ask about consequential ambiguity, not routine implementation details.
+  Include necessary dependent changes. Leave optional cleanup for later.
 - Write the plan to plan.md in the repo it belongs to, and delete it once the work is done.
-- Once we have agreed a plan, execute all of it without stopping to re-confirm each step. Fixes
-  arising from review, and problems you notice in passing, are part of the work and do not need
-  fresh approval. Come back to me when the plan is finished, when it turns out to be wrong, or when
-  you hit something it did not anticipate.
+- Once we agree a plan, execute it without reconfirming each step. Fix review findings within the agreed scope without fresh approval.
+  Report unrelated problems separately. Share intermediate deliverables promptly, especially the draft pull request URL.
+  Return for a decision when the plan proves wrong or an unexpected issue requires a scope change.
 - Before using "dynamic workflows", "ultra code" or any harness feature that immediately spawns a
   large swarm of subagents, always explain the tradeoffs and ask the user for explicit approval.
   Spawning 1-3 subagents to review completed work is expected and does not need approval.
+
+## Draft publication
+
+- When asked to create a pull request, publish a coherent draft after inspecting the diff and passing commit hooks.
+  Share its URL immediately. Record pending checks and known issues in the description.
+- Do not wait for full tests, independent reviews, or hosted continuous integration (CI) before draft publication.
+  Never bypass commit hooks.
+- Draft publication is an intermediate handoff, not a completion claim.
+  Continue verification and independent review while I review. Push fixes to the same pull request.
+- Monitor hosted checks alongside other work while the session is active. Do not block the URL handoff on their completion.
+  Do not promise monitoring after the session ends without an active background mechanism.
+- Do not mark a pull request ready until required verification and review are complete.
 
 ## Explaining technical systems
 
@@ -93,13 +103,13 @@
   modules should know as little as possible about each other's internals.
 - These rules govern code you write, and existing code your change forces you to touch. Do not
   rename, restyle, or strip error handling and comments from code that is otherwise outside your
-  task. Fixing failing lint or tests in that code is the exception.
+  task. Apply the testing scope rules below to unrelated failures.
 
 ## Reviewing work
 
-- A piece of work is any change to files other than plan.md. Review it before handing it back, not
-  after each edit along the way. If you only read, searched, or answered a question, nothing
-  changed and there is nothing to review.
+- A piece of work is any change to files other than plan.md. Review completed work before declaring it finished.
+  Independent review can follow draft publication. Do not review after every edit.
+  If you only read, searched, or answered a question, nothing changed and there is nothing to review.
 - Spin up new subagents with no prior context and have them review that work independently. Scale
   to the change: 1 for something small and low risk, 2-3 for anything large, multi-file, or
   touching critical behaviour. Their lack of context is the point: they see what someone deep in
@@ -118,14 +128,21 @@
 
 ## Testing and bugs
 
+- Run focused local checks for the changed behavior. Hosted CI runs the full pipeline.
+  Full local CI is not required before draft publication.
 - Lean heavily on integration/E2E tests that use real staging, dev or local resources. Never point
-  a test at production. Do not use mocks or patches. Use unit tests only where they actually prove
-  something, e.g. a math function can test that 2 + 2 = 4. Do not write lots of brittle unit tests.
+  a test at production. Do not use mocks, patches, or monkeypatches. Keep unit tests for isolated
+  logic with meaningful invariants or edge cases, not trivial assertions or implementation details.
+- Keep the smallest test suite that protects distinct behaviors and plausible regressions. Prefer
+  extending an existing integration test over adding unit tests. Consolidate or remove redundant
+  tests within the change's scope without losing meaningful regression coverage. A 500-line change
+  does not justify 2,000 lines of tests by itself. If test code dwarfs the change, simplify it and
+  justify what remains by distinct risks, not coverage percentages.
 - When doing bug fixes, always start with reproducing the bug in an E2E setting as closely aligned
   with how an end user would experience it as possible, so the fix targets the real cause.
 - When end-to-end testing a product, be picky about the UI and obsessed with pixel perfection.
-  Apply the same standard to lint errors, test failures, and test flakiness. Fix them even when
-  your work did not cause them.
+  Fix lint errors, test failures, and flakiness caused by this change. Report unrelated failures separately.
+  Do not expand the pull request unless an unrelated failure prevents the requested change or I approve the expansion.
 - Never swallow an error to make something pass. No catch-and-default, no fallback that hides a
   failure. Fail loudly so the problem is visible where it happens.
 
@@ -134,6 +151,14 @@
 - When writing commit messages, NEVER auto-add your agent name as co-author.
 - Never manually modify CHANGELOG.md files or any files that are marked as auto-generated.
 - Always start a commit with an imperative, e.g. Add, Change, Improve, Update.
+
+## PR descriptions
+
+- Always lead with two sections: "The Problem" and "How This Change Fixes It", each using concise dotpoints.
+- Explain the current workflow, its concrete limitation or failure, and the consequence. Include one clear example.
+- Walk through how the change fixes that example. Connect each code change to the problem rather than listing files.
+- Distinguish observed failures from source-inferred risks or proposed capabilities. Never invent a failure to justify a change.
+- Keep verification results and remaining limitations brief, after the two lists.
 
 ## Tool use
 

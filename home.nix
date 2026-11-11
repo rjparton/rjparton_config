@@ -5,6 +5,25 @@ let
   # indirection is what lets the repo be cloned to any path without editing
   # every link below.
   configRepo = "${config.home.homeDirectory}/.dotfiles";
+  opencodeWithLiteLLMAuth = pkgs.writeShellScriptBin "opencode" ''
+    credential_file="${config.home.homeDirectory}/.local/share/opencode/litellm-api-key"
+    credential_temp_file=""
+    trap '${pkgs.coreutils}/bin/rm -f "$credential_temp_file"' EXIT
+
+    if [[ -z "''${LITELLM_API_KEY:-}" ]]; then
+      LITELLM_API_KEY="$(/usr/local/bin/wn-litellm-auth)" || exit $?
+    fi
+
+    ${pkgs.coreutils}/bin/mkdir -p "$(${pkgs.coreutils}/bin/dirname "$credential_file")" || exit $?
+    credential_temp_file="$(${pkgs.coreutils}/bin/mktemp "$credential_file.XXXXXX")" || exit $?
+    printf '%s' "$LITELLM_API_KEY" > "$credential_temp_file" || exit $?
+    ${pkgs.coreutils}/bin/chmod 600 "$credential_temp_file" || exit $?
+    ${pkgs.coreutils}/bin/mv "$credential_temp_file" "$credential_file" || exit $?
+    credential_temp_file=""
+    unset LITELLM_API_KEY credential_file credential_temp_file
+
+    exec ${pkgs.opencode}/bin/opencode "$@"
+  '';
 in
 
 {
@@ -19,10 +38,13 @@ in
     jq        # json on the command line
     lazygit
     neovim
-    opencode  # overlaid from nixpkgs-unstable in flake.nix
+    opencodeWithLiteLLMAuth
     awscli2
     docker-client
     kubectl
+    opentofu
+    kubernetes-helm
+    colima
 
     # Rust arrives through rustup rather than as a Nix-built toolchain, because
     # a repo pinning rust-toolchain.toml has to be honoured, or local fmt and
