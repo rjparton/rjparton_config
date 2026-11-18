@@ -171,3 +171,4 @@
 
 - Never use the em dash "—". Use plain dash "-" instead.
 - When explaining things, use ordered lists where possible.
+- When creating or editing Markdown files, use spaces, never tabs, with two spaces per indentation level.
